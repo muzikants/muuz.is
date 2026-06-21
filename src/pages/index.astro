@@ -1,24 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Nav from "../components/Nav.astro";
+
+const links = [
+  { href: "#", label: "Music" },
+  { href: "#", label: "Work" },
+  { href: "#", label: "About" },
+];
 ---
 
 <Layout>
-  <Nav />
-  <main class="flex min-h-dvh flex-col items-center justify-center px-6 pt-16">
-    <p
-      class="mb-6 font-mono text-xs tracking-[0.35em] text-[var(--muted)] uppercase"
+  <main class="relative flex h-dvh flex-col items-center justify-center px-6">
+    <nav
+      class="absolute inset-x-0 top-0 flex justify-center gap-8 px-6 py-8"
+      aria-label="Primary"
     >
-      Riga · music · sound · web
-    </p>
+      {
+        links.map(({ href, label }) => (
+          <a
+            href={href}
+            class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+
     <h1
-      class="text-[clamp(3rem,12vw,7rem)] leading-none font-medium tracking-[-0.04em] text-[var(--text)] uppercase"
+      class="text-[clamp(3rem,12vw,7rem)] leading-none font-medium tracking-[-0.04em] text-[var(--text)]"
     >
       muuz.is
     </h1>
-    <p class="mt-8 max-w-md text-center text-sm leading-relaxed text-[var(--muted)]">
-      Curated work — not a resume. Shell only; collections and case studies land in
-      Lesson 4.
-    </p>
   </main>
 </Layout>
