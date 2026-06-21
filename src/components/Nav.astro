@@ -1,0 +1,35 @@
+---
+const links = [
+  { href: "/music", label: "Music" },
+  { href: "/work", label: "Work" },
+  { href: "/about", label: "About" },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-10 border-b border-white/5 bg-[var(--bg)]/80 backdrop-blur-sm">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
+    aria-label="Primary"
+  >
+    <a
+      href="/"
+      class="font-mono text-sm tracking-[0.2em] text-[var(--text)] uppercase transition-opacity hover:opacity-70"
+    >
+      muuz.is
+    </a>
+    <ul class="flex gap-8">
+      {
+        links.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

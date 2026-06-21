@@ -1,0 +1,7 @@
+---
+title: "Placeholder"
+year: 2026
+featured: false
+---
+
+Content collections scaffold — replace in Lesson 4.

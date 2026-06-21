@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+---
+
+<Layout>
+  <Nav />
+  <main class="flex min-h-dvh flex-col items-center justify-center px-6 pt-16">
+    <p
+      class="mb-6 font-mono text-xs tracking-[0.35em] text-[var(--muted)] uppercase"
+    >
+      Riga · music · sound · web
+    </p>
+    <h1
+      class="text-[clamp(3rem,12vw,7rem)] leading-none font-medium tracking-[-0.04em] text-[var(--text)] uppercase"
+    >
+      muuz.is
+    </h1>
+    <p class="mt-8 max-w-md text-center text-sm leading-relaxed text-[var(--muted)]">
+      Curated work — not a resume. Shell only; collections and case studies land in
+      Lesson 4.
+    </p>
+  </main>
+</Layout>
