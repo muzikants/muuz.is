@@ -1,6 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Panel from "../components/Panel.astro";
+
+const featuredWork = (await getCollection("work", ({ data }) => data.featured)).sort(
+  (a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title),
+);
 ---
 
 <Layout mainClass="min-h-dvh">
@@ -27,19 +32,17 @@ import Panel from "../components/Panel.astro";
     </div>
 
     <div class="work-grid">
-      <Panel
-        title="MG Bootcamp"
-        meta="Web · 2025"
-        href="/work"
-        span="large"
-      />
-      <Panel
-        title="RAW 26"
-        meta="Sound design · 2026"
-        href="/work"
-        span="default"
-        offset
-      />
+      {
+        featuredWork.map((entry, index) => (
+          <Panel
+            title={entry.data.title}
+            meta={`${entry.data.role} · ${entry.data.year}`}
+            href={`/work/${entry.id}`}
+            span={entry.data.gridSpan}
+            offset={index === 1}
+          />
+        ))
+      }
     </div>
   </section>
 </Layout>

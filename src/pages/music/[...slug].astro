@@ -1,0 +1,81 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import SectionLabel from "../../components/SectionLabel.astro";
+
+export async function getStaticPaths() {
+  const music = await getCollection("music");
+  return music.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, year, format, cover, spotify, bandcamp, soundcloud } = entry.data;
+
+const links = [
+  spotify && { label: "Spotify", href: spotify },
+  bandcamp && { label: "Bandcamp", href: bandcamp },
+  soundcloud && { label: "SoundCloud", href: soundcloud },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<Layout title={title}>
+  <div class="page-shell">
+    <SectionLabel code="MUS-002" label="Music" />
+
+    <article class="max-w-2xl space-y-10">
+      <header class="space-y-4">
+        <p class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase">
+          {format ? `${format} · ${year}` : year}
+        </p>
+        <h1 class="text-display-lg font-medium text-[var(--text)]">{title}</h1>
+      </header>
+
+      {
+        cover && (
+          <img
+            src={cover}
+            alt={`${title} cover art`}
+            class="aspect-square w-full max-w-sm border border-[var(--color-border)] object-cover"
+            loading="lazy"
+          />
+        )
+      }
+
+      <div class="prose-invert space-y-4 text-[var(--text)]">
+        <Content />
+      </div>
+
+      {
+        links.length > 0 && (
+          <ul class="flex flex-wrap gap-x-6 gap-y-2">
+            {links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+
+      <p>
+        <a
+          href="/music"
+          class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+        >
+          ← All music
+        </a>
+      </p>
+    </article>
+  </div>
+</Layout>

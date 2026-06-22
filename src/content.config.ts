@@ -7,6 +7,7 @@ const music = defineCollection({
   schema: z.object({
     title: z.string(),
     year: z.number(),
+    format: z.string().optional(),
     featured: z.boolean().default(false),
     gridSpan: z.enum(["large", "wide", "default"]).default("default"),
     cover: z.string().optional(),

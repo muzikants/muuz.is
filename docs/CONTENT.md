@@ -20,14 +20,13 @@ _Use when filling `src/content/music/` and `src/content/work/` or wiring panel c
 | Slug | Title | Year | Notes |
 | --- | --- | --- | --- |
 | `ss24` | SS24 | 2025 | EP |
-| `fear-survivor` | Fear Survivor | 2023 | Album |
-| `cicada` | cicada | 2022 | Album |
+| `delta` | Delta | 2026 | Album — debut, in progress |
+| `fear-survivor` | Fear Survivor | 2023 | Mixtape |
+| `cicada` | cicada | 2022 | Mixtape |
 | `water` | Water | 2023 | Single |
 | `sea12-remix` | SEA12 (muuzis Remix) | 2024 | |
 | `rbd` | ＲＢＤ™ | — | Bandcamp |
 | `munch-deconstructed` | munch //\*deconstructed mix | — | Bandcamp |
-
-**Delta album:** full album in progress — optional "coming soon" card later, not a v1 blocker.
 
 ## Cover images
 

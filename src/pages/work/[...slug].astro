@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import SectionLabel from "../../components/SectionLabel.astro";
+
+export async function getStaticPaths() {
+  const work = await getCollection("work");
+  return work.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, role, year, url, tags } = entry.data;
+---
+
+<Layout title={title}>
+  <div class="page-shell">
+    <SectionLabel code="WRK-002" label="Work" />
+
+    <article class="max-w-2xl space-y-10">
+      <header class="space-y-4">
+        <p class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase">
+          {role} · {year}
+        </p>
+        <h1 class="text-display-lg font-medium text-[var(--text)]">{title}</h1>
+        {
+          tags.length > 0 && (
+            <ul class="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <li class="font-mono text-xs tracking-wide text-[var(--muted)] uppercase">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </header>
+
+      <div class="prose-invert space-y-4 text-[var(--text)]">
+        <Content />
+      </div>
+
+      {
+        url && (
+          <p>
+            <a
+              href={url}
+              class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View project →
+            </a>
+          </p>
+        )
+      }
+
+      <p>
+        <a
+          href="/work"
+          class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+        >
+          ← All work
+        </a>
+      </p>
+    </article>
+  </div>
+</Layout>

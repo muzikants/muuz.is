@@ -14,12 +14,12 @@
 | 0 | Plan & brief | ✅ done |
 | 1 | Scaffold + Vercel | ✅ done |
 | 2 | Design shell | ✅ done (Lesson 4) |
-| 3 | Content collections | 🔲 not started |
+| 3 | Content collections | ✅ done (covers blocked on T-306) |
 | 4 | SEO + meta | 🔲 not started |
 | 5 | DNS cutover | 🔲 blocked on content smoke test |
 | 6 | Polish buffer | 🔲 |
 
-**Current focus:** Phase 3 — real content in collections + detail routes.
+**Current focus:** Phase 2 shell polish (footer, mobile) + Phase 4 signature (3D hero, OG meta).
 
 ---
 
@@ -56,35 +56,40 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 ### Phase 3 — content
 
 #### T-301 — Work content collection entries
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** 6 work entries in `src/content/work/` from CONTENT.md; placeholders removed.
 - **Deps:** none
 - **Scope:** `src/content/work/*.md`, remove `_placeholder.md`
 - **Acceptance:** 6 entries per `docs/CONTENT.md`; valid frontmatter (`title`, `year`, `role`, `featured`, `gridSpan`, `url` where known); `npm run build` passes
 - **Prompt:** _Create work collection markdown files from docs/CONTENT.md. Delete _placeholder.md._
 
 #### T-302 — Music content collection entries
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** 5 music entries in `src/content/music/` (4 v1 grid + SEA12 remix); Bandcamp-only entries deferred until year known.
 - **Deps:** none
 - **Scope:** `src/content/music/*.md`, remove `_placeholder.md`
 - **Acceptance:** ≥4 releases from CONTENT.md; Spotify/Bandcamp URLs in frontmatter where known
 - **Prompt:** _Create music collection markdown files from docs/CONTENT.md._
 
 #### T-303 — Dynamic grid from collections
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** Home, `/work`, and `/music` render panels from `getCollection()`; added `format` to music schema for panel meta.
 - **Deps:** T-301, T-302
 - **Scope:** `src/pages/work/index.astro`, `src/pages/music/index.astro`, `src/pages/index.astro`
 - **Acceptance:** Index pages render `Panel` from `getCollection()`; featured filter on home; no hardcoded panel arrays
 - **Prompt:** _Replace hardcoded Panel lists with Astro content collection queries. Home shows featured work only._
 
 #### T-304 — Work detail route
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** `src/pages/work/[...slug].astro` — title, role, year, tags, outbound URL, body.
 - **Deps:** T-301
 - **Scope:** `src/pages/work/[...slug].astro`, optional `src/layouts/CaseStudy.astro`
 - **Acceptance:** Each work slug renders title, role, year, outbound URL or embed placeholder; 404 for unknown slugs
 - **Prompt:** _Add work/[...slug].astro case study layout. Minimal template — expand in T-306._
 
 #### T-305 — Music detail route
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** `src/pages/music/[...slug].astro` — title, format, year, platform links, optional cover.
 - **Deps:** T-302
 - **Scope:** `src/pages/music/[...slug].astro`
 - **Acceptance:** Title, year, links to Spotify/Bandcamp; cover image if `cover` set
@@ -196,4 +201,5 @@ Wave 5:             T-403 → T-501 → T-502
 
 | Date | Change |
 | --- | --- |
-| 2026-06-22 | Plan created. Phase 2 marked done (tokens, 4 routes, Panel grid). |
+| 2026-06-22 | Phase 3 content: T-301–T-305 done. 6 work + 5 music entries; dynamic grids; detail routes. Build → 15 pages. |
+| 2026-06-22 | Plan created. Phase 2 marked done (tokens, 4 routes, Panel grid). Pushed `f60be39` to main → Vercel deploy. |
