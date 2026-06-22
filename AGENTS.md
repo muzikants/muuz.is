@@ -55,6 +55,16 @@ Suggested dispatch prompt for workers:
 
 > Open `~/Documents/MZ/muuz.is`. Read AGENTS.md and docs/PLAN.md. Execute task **T-###** only. Run `npm run build`. Update PLAN task status. Commit with message referencing task ID.
 
+## Cursor Cloud specific instructions
+
+Cloud agents use `.cursor/environment.json` (Node 22.14, `npm ci`). No secrets required for this static site.
+
+1. Read `docs/PLAN.md` and `docs/BRIEF.md` before coding.
+2. Run `npm run build` before finishing; fix failures in scope.
+3. Do not lower `engines.node` in `package.json` — Astro 6 requires `>=22.12.0`.
+4. Vercel deploys on push to `main`; do not run deploy commands locally.
+5. Only commit when the task or user explicitly asks.
+
 ## Brain vault (reference only)
 
 Creative brief origin + learn track history live in Obsidian (`MZ_Documents/Brain`).  
