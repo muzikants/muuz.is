@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SectionLabel from "../../components/SectionLabel.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+---
+
+<Layout title="About">
+  <div class="page-shell">
+    <SectionLabel code="ABT-001" label="About" />
+
+    <div class="max-w-md space-y-12">
+      <p class="font-mono text-sm tracking-wide text-[var(--muted)]">
+        Riga · music, sound design, web
+      </p>
+
+      <div>
+        <p class="section-label mb-6">Links</p>
+        <SocialLinks />
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,13 @@
+---
+interface Props {
+  code?: string;
+  label: string;
+}
+
+const { code, label } = Astro.props;
+---
+
+<div class="mb-6 flex items-baseline gap-4">
+  {code && <span class="section-label">{code}</span>}
+  <h1 class="section-title">{label}</h1>
+</div>

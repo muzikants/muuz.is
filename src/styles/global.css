@@ -1,4 +1,32 @@
 @import "tailwindcss";
+@import "@fontsource/ibm-plex-sans-condensed/400.css";
+@import "@fontsource/ibm-plex-sans-condensed/500.css";
+@import "@fontsource/ibm-plex-sans-condensed/600.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-surface: #141414;
+  --color-text: #e8e8e8;
+  --color-muted: #737373;
+  --color-border: rgb(255 255 255 / 0.06);
+
+  --font-display: "IBM Plex Sans Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-display-xl: clamp(3rem, 12vw, 7rem);
+  --text-display-lg: clamp(2rem, 5vw, 3.5rem);
+  --text-display-md: clamp(1.5rem, 3vw, 2.25rem);
+  --text-body: 1rem;
+  --text-meta: 0.75rem;
+
+  --spacing-page-x: 1.5rem;
+  --spacing-page-y: 6rem;
+  --spacing-nav: 4.5rem;
+
+  --max-width-content: 72rem;
+}
 
 :root {
   --bg: #0a0a0a;
@@ -7,7 +35,205 @@
   --muted: #737373;
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  ::selection {
+    background: rgb(255 255 255 / 0.15);
+    color: var(--text);
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .text-display-xl {
+    font-size: var(--text-display-xl);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .text-display-lg {
+    font-size: var(--text-display-lg);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .text-display-md {
+    font-size: var(--text-display-md);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .page-shell {
+    margin-inline: auto;
+    max-width: var(--max-width-content);
+    padding-inline: var(--spacing-page-x);
+    padding-block: var(--spacing-page-y);
+    padding-top: calc(var(--spacing-nav) + 2rem);
+  }
+
+  .hero-wordmark {
+    animation: hero-settle 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-display-md);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .section-title {
+      animation: section-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border: 1px solid var(--color-border);
+    background: var(--surface);
+    padding: 1.25rem;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.35s ease;
+  }
+
+  .panel:hover {
+    transform: translateY(-4px);
+    border-color: rgb(255 255 255 / 0.12);
+  }
+
+  .panel:hover .panel-meta {
+    color: var(--text);
+  }
+
+  .panel-cover {
+    aspect-ratio: 16 / 10;
+    background: rgb(255 255 255 / 0.03);
+    border: 1px solid var(--color-border);
+  }
+
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .panel-meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.35s ease;
+  }
+
+  .work-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .grid-span-large {
+    grid-column: span 12;
+  }
+
+  .grid-span-wide {
+    grid-column: span 12;
+  }
+
+  .grid-span-default {
+    grid-column: span 12;
+  }
+
+  @media (min-width: 768px) {
+    .grid-span-large {
+      grid-column: span 7;
+      grid-row: span 2;
+    }
+
+    .grid-span-wide {
+      grid-column: span 8;
+    }
+
+    .grid-span-default {
+      grid-column: span 5;
+    }
+
+    .grid-offset {
+      margin-top: 2.5rem;
+    }
+  }
+}
+
+@keyframes hero-settle {
+  from {
+    opacity: 0;
+    letter-spacing: 0.12em;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    letter-spacing: -0.04em;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-enter {
+  from {
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+  }
+
+  to {
+    letter-spacing: -0.01em;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-wordmark,
+  .section-title {
+    animation: none;
+  }
+
+  .panel {
+    transition: none;
+  }
 }

@@ -1,19 +1,30 @@
 ---
 const links = [
-  { href: "#", label: "Music" },
-  { href: "#", label: "Work" },
-  { href: "#", label: "About" },
+  { href: "/music", label: "Music" },
+  { href: "/work", label: "Work" },
+  { href: "/about", label: "About" },
 ];
+
+const pathname = Astro.url.pathname;
+
+function isActive(href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 ---
 
-<header class="fixed inset-x-0 top-0 z-10 border-b border-white/5 bg-[var(--bg)]/80 backdrop-blur-sm">
+<header
+  class="fixed inset-x-0 top-0 z-10 border-b border-[var(--color-border)] bg-[var(--bg)]/85 backdrop-blur-sm"
+>
   <nav
     class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
     aria-label="Primary"
   >
     <a
       href="/"
-      class="font-mono text-sm tracking-[0.2em] text-[var(--text)] uppercase transition-opacity hover:opacity-70"
+      class:list={[
+        "font-mono text-sm tracking-[0.2em] uppercase transition-opacity hover:opacity-70",
+        pathname === "/" ? "text-[var(--text)]" : "text-[var(--muted)]",
+      ]}
     >
       muuz.is
     </a>
@@ -23,7 +34,13 @@ const links = [
           <li>
             <a
               href={href}
-              class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+              aria-current={isActive(href) ? "page" : undefined}
+              class:list={[
+                "font-mono text-xs tracking-widest uppercase transition-colors",
+                isActive(href)
+                  ? "text-[var(--text)]"
+                  : "text-[var(--muted)] hover:text-[var(--text)]",
+              ]}
             >
               {label}
             </a>

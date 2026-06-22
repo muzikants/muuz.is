@@ -1,35 +1,45 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const links = [
-  { href: "#", label: "Music" },
-  { href: "#", label: "Work" },
-  { href: "#", label: "About" },
-];
+import Panel from "../components/Panel.astro";
 ---
 
-<Layout>
-  <main class="relative flex h-dvh flex-col items-center justify-center px-6">
-    <nav
-      class="absolute inset-x-0 top-0 flex justify-center gap-8 px-6 py-8"
-      aria-label="Primary"
-    >
-      {
-        links.map(({ href, label }) => (
-          <a
-            href={href}
-            class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
-          >
-            {label}
-          </a>
-        ))
-      }
-    </nav>
-
-    <h1
-      class="text-[clamp(3rem,12vw,7rem)] leading-none font-medium tracking-[-0.04em] text-[var(--text)]"
-    >
+<Layout mainClass="min-h-dvh">
+  <section
+    class="flex min-h-[70dvh] flex-col items-center justify-center px-6 pt-[var(--spacing-nav)]"
+  >
+    <h1 class="hero-wordmark text-display-xl font-medium text-[var(--text)]">
       muuz.is
     </h1>
-  </main>
+  </section>
+
+  <section class="page-shell border-t border-[var(--color-border)] pt-16">
+    <div class="mb-10 flex items-baseline justify-between gap-4">
+      <div>
+        <p class="section-label mb-2">Featured</p>
+        <h2 class="section-title">Selected work</h2>
+      </div>
+      <a
+        href="/work"
+        class="font-mono text-xs tracking-widest text-[var(--muted)] uppercase transition-colors hover:text-[var(--text)]"
+      >
+        View all →
+      </a>
+    </div>
+
+    <div class="work-grid">
+      <Panel
+        title="MG Bootcamp"
+        meta="Web · 2025"
+        href="/work"
+        span="large"
+      />
+      <Panel
+        title="RAW 26"
+        meta="Sound design · 2026"
+        href="/work"
+        span="default"
+        offset
+      />
+    </div>
+  </section>
 </Layout>

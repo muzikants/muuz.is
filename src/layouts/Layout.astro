@@ -1,15 +1,20 @@
 ---
+import Nav from "../components/Nav.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
+  mainClass?: string;
 }
 
 const {
   title = "muuz.is",
   description = "Music, sound design, and web — one practice.",
+  mainClass = "",
 } = Astro.props;
+
+const pageTitle = title === "muuz.is" ? title : `${title} · muuz.is`;
 ---
 
 <!doctype html>
@@ -21,9 +26,12 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
   </head>
   <body class="min-h-dvh antialiased">
-    <slot />
+    <Nav />
+    <main class={mainClass}>
+      <slot />
+    </main>
   </body>
 </html>

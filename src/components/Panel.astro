@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  meta: string;
+  href?: string;
+  span?: "large" | "wide" | "default";
+  offset?: boolean;
+}
+
+const { title, meta, href = "#", span = "default", offset = false } = Astro.props;
+
+const spanClass = {
+  large: "grid-span-large",
+  wide: "grid-span-wide",
+  default: "grid-span-default",
+}[span];
+---
+
+<a
+  href={href}
+  class:list={["panel group", spanClass, offset && "grid-offset"]}
+>
+  <div class="panel-cover" aria-hidden="true"></div>
+  <div>
+    <p class="panel-title">{title}</p>
+    <p class="panel-meta">{meta}</p>
+  </div>
+</a>
