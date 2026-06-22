@@ -70,3 +70,10 @@ Cloud agents use `.cursor/environment.json` (Node 22.14, `npm ci`). No secrets r
 Creative brief origin + learn track history live in Obsidian (`MZ_Documents/Brain`).  
 Harvest wiki notes **after** launch, not during build sprints.  
 If BRIEF and Brain disagree, **BRIEF in this repo wins**.
+
+## Cursor Cloud specific instructions
+
+- Static Astro 6 site; npm (see `package-lock.json`), Node 22. Dependencies are refreshed automatically on startup, so no manual install is needed.
+- Standard scripts live in `package.json`: `npm run dev` (serves on `http://localhost:4321`, no `--host`), `npm run build` (static output to `dist/`), `npm run preview`.
+- There is **no lint or test script** in this repo. `npm run build` is the only automated gate (it also runs content-collection + type generation). Don't assume a `lint`/`test` command exists.
+- The dev server binds to localhost only; add `--host` if you need to reach it from outside the VM.
