@@ -1,6 +1,6 @@
 # muuz.is — build plan & agent task queue
 
-**Updated:** 2026-06-22  
+**Updated:** 2026-07-02  
 **Deadline:** Ship before **2026-07-05** (Cursor sub); soft target **2026-07-04** (MG Bootcamp event)  
 **Preview:** https://muuzis.vercel.app  
 **Repo:** https://github.com/muzikants/muuz.is
@@ -13,13 +13,19 @@
 | --- | --- | --- |
 | 0 | Plan & brief | ✅ done |
 | 1 | Scaffold + Vercel | ✅ done |
-| 2 | Design shell | ✅ done (Lesson 4) |
+| 2 | Design shell | ✅ done |
 | 3 | Content collections | ✅ done (covers blocked on T-306) |
-| 4 | SEO + meta | 🔲 not started |
+| 4 | SEO + meta | ✅ done (migration) |
 | 5 | DNS cutover | 🔲 blocked on content smoke test |
 | 6 | Polish buffer | 🔲 |
 
-**Current focus:** Phase 2 shell polish (footer, mobile) + Phase 4 signature (3D hero, OG meta).
+**Current focus:** User assets (T-306) + DNS cutover (T-501).
+
+---
+
+## Stack migration (2026-07-02)
+
+Astro 6 → **Next.js 15** (App Router, static export). Content moved to `content/`; routes in `src/app/`; loader in `src/lib/content.ts`. Build emits 20 static routes (incl. sitemap, detail pages).
 
 ---
 
@@ -38,16 +44,18 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 ### Phase 2 — shell (remaining)
 
 #### T-201 — Footer component
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** `src/components/Footer.tsx` wired in `src/app/layout.tsx` — mono wordmark, year, compact social links.
 - **Deps:** none
-- **Scope:** `src/components/Footer.astro`, wire into `Layout.astro`
+- **Scope:** `src/components/Footer.tsx`, `src/app/layout.tsx`
 - **Acceptance:** Minimal footer — `muuz.is` mono, year, social icons or text links; matches B&W tokens; mobile-safe
 - **Prompt:** _Add a minimal Footer per docs/BRIEF.md and include it in Layout.astro._
 
 #### T-202 — Mobile + a11y pass (shell)
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** Focus-visible on links; mobile single-column grid; nav gap tightened at 375px in `Nav.tsx` + `globals.css`.
 - **Deps:** T-201 (optional)
-- **Scope:** `global.css`, `Nav.astro`, grid pages
+- **Scope:** `src/app/globals.css`, `src/components/Nav.tsx`, grid pages
 - **Acceptance:** Nav usable at 375px; focus visible on links; no horizontal scroll; `prefers-reduced-motion` respected (already partial)
 - **Prompt:** _Mobile responsive pass on nav and work-grid. Visible focus states on all interactive elements._
 
@@ -116,24 +124,27 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 ### Phase 4 — signature & SEO
 
 #### T-401 — Three.js hero island
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** `src/components/Hero3D.tsx` — `@react-three/fiber` wireframe icosahedron, lazy via client component, reduced-motion fallback.
 - **Deps:** none (can parallel Phase 3)
-- **Scope:** `src/components/Hero3D.tsx` or `.astro` island, `src/pages/index.astro`
+- **Scope:** `src/components/Hero3D.tsx`, `src/app/page.tsx`
 - **Acceptance:** Client island `client:visible`; monochrome placeholder mesh or glTF if available; no CLS; hero load = motion moment 1
 - **Note:** v1 can ship Form A (stealth silhouette) only; morph = v1.1
 - **Prompt:** _Add a Three.js client island to the home hero. Monochrome, lazy-loaded, placeholder geometry OK._
 
 #### T-402 — OG meta + favicon polish
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** `src/lib/metadata.ts` — `metadataBase`, Open Graph + Twitter on all routes; `public/og-default.png`.
 - **Deps:** none
-- **Scope:** `Layout.astro`, `public/og-default.png`, per-page titles
+- **Scope:** `src/app/layout.tsx`, `public/og-default.png`, per-page metadata
 - **Acceptance:** `og:title`, `og:description`, `og:image`, `twitter:card` on all routes; favicon already exists
 - **Prompt:** _Add Open Graph and Twitter meta tags. Create or placeholder og-default.png 1200×630._
 
 #### T-403 — Sitemap
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** `src/app/sitemap.ts` — static routes + all work/music slugs at build time.
 - **Deps:** T-304, T-305
-- **Scope:** `@astrojs/sitemap` integration
+- **Scope:** `src/app/sitemap.ts`
 - **Acceptance:** `/sitemap-index.xml` generated on build; `site` in astro.config correct
 - **Prompt:** _Add @astrojs/sitemap for static routes and content pages._
 
@@ -201,5 +212,6 @@ Wave 5:             T-403 → T-501 → T-502
 
 | Date | Change |
 | --- | --- |
+| 2026-07-02 | **Stack migration:** Astro → Next.js 15 static export. T-201, T-202, T-401, T-402, T-403 done on new stack. Build → 20 static routes. |
 | 2026-06-22 | Phase 3 content: T-301–T-305 done. 6 work + 5 music entries; dynamic grids; detail routes. Build → 15 pages. |
 | 2026-06-22 | Plan created. Phase 2 marked done (tokens, 4 routes, Panel grid). Pushed `f60be39` to main → Vercel deploy. |

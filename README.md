@@ -1,6 +1,6 @@
 # muuz.is
 
-Personal portfolio — Astro, Tailwind v4, Vercel.
+Personal portfolio — Next.js 15, Tailwind v4, Vercel.
 
 **Preview:** https://muuzis.vercel.app  
 **Target:** https://muuz.is
@@ -9,9 +9,8 @@ Personal portfolio — Astro, Tailwind v4, Vercel.
 
 ```sh
 npm install
-npm run dev      # http://localhost:4321
-npm run build
-npm run preview
+npm run dev      # http://localhost:3000
+npm run build    # static export → out/
 ```
 
 ## For agents
@@ -26,9 +25,9 @@ This repo is self-contained. Do not switch to the Brain/Obsidian vault for imple
 ## Structure
 
 ```
-src/pages/        Routes
+src/app/          Routes (App Router)
 src/components/   UI
-src/content/      Music + work collections
-src/styles/       Design tokens (global.css)
+src/lib/          Content loader + schemas
+content/          Music + work markdown
 docs/             Plan, brief, content inventory
 ```

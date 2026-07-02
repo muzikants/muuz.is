@@ -17,7 +17,7 @@ Do not switch to the Brain vault for implementation work. Planning lives here.
 | --- | --- |
 | Stay in `~/Documents/MZ/muuz.is` | Avoids split context with Brain/Obsidian |
 | One task per agent session | Keeps diffs reviewable |
-| `npm run build` must pass | Static Astro site; no broken deploys |
+| `npm run build` must pass | Static Next.js export; no broken deploys |
 | No site-wide accent colors | B&W shell per BRIEF |
 | Max 3 motion moments in v1 | Hero load · scroll titles · panel hover |
 | Hero = `muuz.is` wordmark only | No personal name in hero |
@@ -26,9 +26,9 @@ Do not switch to the Brain vault for implementation work. Planning lives here.
 
 ## Stack (locked)
 
-- Astro 6, static output, Tailwind v4 via Vite plugin
+- Next.js 15 App Router, static export (`output: 'export'`), Tailwind v4 via PostCSS
 - IBM Plex Sans Condensed + IBM Plex Mono (`@fontsource`)
-- Content Collections for `music` and `work`
+- Markdown content in `content/` loaded via `src/lib/content.ts` (gray-matter + Zod)
 - Vercel auto-deploy on push to `main`
 - Preview: https://muuzis.vercel.app
 - Target domain: `muuz.is` (apex currently 500 — DNS task)
@@ -36,11 +36,11 @@ Do not switch to the Brain vault for implementation work. Planning lives here.
 ## Key paths
 
 ```
-src/pages/           Routes
-src/components/      UI primitives (Nav, Panel, …)
-src/layouts/         Layout.astro
-src/content/         Markdown entries (music/, work/)
-src/styles/global.css Design tokens + component classes
+src/app/             Routes (App Router)
+src/components/      UI primitives (Nav, Panel, Footer, Hero3D, …)
+src/lib/             Content loader, metadata helpers, Zod schemas
+content/             Markdown entries (music/, work/)
+src/app/globals.css  Design tokens + component classes
 docs/PLAN.md         Task queue for agents
 docs/BRIEF.md        Creative brief (locked)
 docs/CONTENT.md      Launch content inventory
@@ -61,7 +61,7 @@ Cloud agents use `.cursor/environment.json` (Node 22.14, `npm ci`). No secrets r
 
 1. Read `docs/PLAN.md` and `docs/BRIEF.md` before coding.
 2. Run `npm run build` before finishing; fix failures in scope.
-3. Do not lower `engines.node` in `package.json` — Astro 6 requires `>=22.12.0`.
+3. Do not lower `engines.node` in `package.json` — keep `>=22.12.0`.
 4. Vercel deploys on push to `main`; do not run deploy commands locally.
 5. Only commit when the task or user explicitly asks.
 
