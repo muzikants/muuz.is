@@ -22,6 +22,10 @@ export const workSchema = z.object({
   video: z.string().optional(),
   url: z.string().url().optional(),
   tags: z.array(z.string()).default([]),
+  accent: z
+    .string()
+    .regex(/^#[0-9a-fA-F]{6}$/, "Accent must be a 6-digit hex color")
+    .optional(),
 });
 
 export type MusicData = z.output<typeof musicSchema>;

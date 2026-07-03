@@ -16,6 +16,11 @@ export default function WorkIndexPage() {
     <div className="page-shell">
       <SectionLabel code="WRK-001" label="Work" />
 
+      <p className="mb-12 max-w-xl text-[var(--muted)]">
+        Selected projects across web, commercial, and sound — asymmetric grid,
+        detail on click.
+      </p>
+
       <div className="work-grid">
         {work.map((entry, index) => (
           <Panel
@@ -24,7 +29,7 @@ export default function WorkIndexPage() {
             meta={`${entry.data.role} · ${entry.data.year}`}
             href={`/work/${entry.slug}`}
             span={entry.data.gridSpan}
-            offset={index === 1}
+            offset={index % 3 === 1}
             cover={entry.data.cover}
           />
         ))}

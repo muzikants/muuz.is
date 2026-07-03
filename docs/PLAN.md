@@ -19,7 +19,7 @@
 | 5 | DNS cutover | ✅ done |
 | 6 | Polish buffer | 🔲 |
 
-**Current focus:** Optional `raw-2026` panel still (sound-only project, no video).
+**Current focus:** Phase 6 polish — Lighthouse pass (T-601) optional.
 
 ---
 
@@ -175,6 +175,13 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 
 ### Phase 6 — polish (post-MVP)
 
+#### T-603 — Hero 3D + case study layout polish
+- **Status:** `done`
+- **Handoff:** Enhanced `Hero3D` — stealth wireframe silhouette, MGS codec grid, lazy-loaded canvas (`Hero3DCanvas.tsx`), hero load animations. New `CaseStudy` layout for work detail pages with per-project accent colors, meta rail, media slot. `raw-2026` waveform SVG cover added.
+- **Deps:** T-401, T-304
+- **Scope:** `Hero3D.tsx`, `Hero3DCanvas.tsx`, `CaseStudy.tsx`, `work/[slug]/page.tsx`, `globals.css`, work frontmatter accents
+- **Acceptance:** Hero is full-viewport with animated 3D island; case studies use structured layout; build passes; home First Load JS reduced via dynamic import
+
 #### T-601 — Lighthouse performance pass
 - **Status:** `deferred`
 - **Deps:** T-401, T-306
@@ -216,6 +223,7 @@ Wave 5:             T-403 → T-501 → T-502
 
 | Date | Change |
 | --- | --- |
+| 2026-07-03 | T-603: Enhanced 3D hero (stealth silhouette, codec grid, lazy load), CaseStudy layout with per-project accents, raw-2026 waveform cover. |
 | 2026-07-03 | T-307: Commercial reels from `~/Documents/MZ/PORTFOLIO/` → `public/video/`, panel posters, `WorkVideo` embeds on case studies. |
 | 2026-07-03 | T-306 partial: Panel cover images, 5 music + mg-bootcamp WebP covers, album Spotify URLs. T-502: `docs/LAUNCH.md` smoke checklist. |
 | 2026-07-02 | **Stack migration:** Astro → Next.js 15 static export. T-201, T-202, T-401, T-402, T-403 done on new stack. Build → 20 static routes. |
