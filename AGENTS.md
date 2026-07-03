@@ -17,7 +17,7 @@ Do not switch to the Brain vault for implementation work. Planning lives here.
 | --- | --- |
 | Stay in `~/Documents/MZ/muuz.is` | Avoids split context with Brain/Obsidian |
 | One task per agent session | Keeps diffs reviewable |
-| `npm run build` must pass | Static Next.js export; no broken deploys |
+| `npm run build` must pass | Next.js site; no broken deploys |
 | No site-wide accent colors | B&W shell per BRIEF |
 | Max 3 motion moments in v1 | Hero load · scroll titles · panel hover |
 | Hero = `muuz.is` wordmark only | No personal name in hero |
@@ -26,7 +26,7 @@ Do not switch to the Brain vault for implementation work. Planning lives here.
 
 ## Stack (locked)
 
-- Next.js 15 App Router, static export (`output: 'export'`), Tailwind v4 via PostCSS
+- Next.js 15 App Router, Vercel-native deploy (static pages via SSG), Tailwind v4 via PostCSS
 - IBM Plex Sans Condensed + IBM Plex Mono (`@fontsource`)
 - Markdown content in `content/` loaded via `src/lib/content.ts` (gray-matter + Zod)
 - Vercel auto-deploy on push to `main`
