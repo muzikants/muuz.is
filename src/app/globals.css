@@ -137,6 +137,12 @@
       border-color 0.35s ease;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .panel-cover-img {
+      transition: filter 0.35s ease;
+    }
+  }
+
   .panel:hover {
     transform: translateY(-4px);
     border-color: rgb(255 255 255 / 0.12);
@@ -147,9 +153,32 @@
   }
 
   .panel-cover {
+    position: relative;
     aspect-ratio: 16 / 10;
+    overflow: hidden;
     background: rgb(255 255 255 / 0.03);
     border: 1px solid var(--color-border);
+  }
+
+  .panel-cover-img {
+    object-fit: cover;
+    filter: grayscale(1);
+  }
+
+  .panel:hover .panel-cover-img {
+    filter: grayscale(0.85);
+  }
+
+  .work-video {
+    border: 1px solid var(--color-border);
+    background: var(--surface);
+  }
+
+  .work-video-player {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
   }
 
   .panel-title {

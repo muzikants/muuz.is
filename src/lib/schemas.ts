@@ -19,6 +19,7 @@ export const workSchema = z.object({
   featured: z.boolean().default(false),
   gridSpan: z.enum(["large", "wide", "default"]).default("default"),
   cover: z.string().optional(),
+  video: z.string().optional(),
   url: z.string().url().optional(),
   tags: z.array(z.string()).default([]),
 });

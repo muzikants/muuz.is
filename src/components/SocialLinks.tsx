@@ -1,12 +1,14 @@
 const links = [
-  { label: "SoundCloud", href: "https://soundcloud.com/muuzis" },
+  { label: "SoundCloud", href: "https://soundcloud.com/muuzis", external: true },
   {
     label: "Spotify",
     href: "https://open.spotify.com/artist/6g0aXENYFr0qfxoLxPibhT",
+    external: true,
   },
-  { label: "Bandcamp", href: "https://muuzis.bandcamp.com/" },
-  { label: "Instagram", href: "https://www.instagram.com/_muuzis/" },
-  { label: "YouTube", href: "https://www.youtube.com/@muuzis" },
+  { label: "Bandcamp", href: "https://muuzis.bandcamp.com/", external: true },
+  { label: "Instagram", href: "https://www.instagram.com/_muuzis/", external: true },
+  { label: "YouTube", href: "https://www.youtube.com/@muuzis", external: true },
+  { label: "Email", href: "mailto:muuziba@gmail.com", external: false },
 ];
 
 type SocialLinksProps = {

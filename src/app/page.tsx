@@ -38,6 +38,7 @@ export default function HomePage() {
               href={`/work/${entry.slug}`}
               span={entry.data.gridSpan}
               offset={index === 1}
+              cover={entry.data.cover}
             />
           ))}
         </div>

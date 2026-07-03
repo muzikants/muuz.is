@@ -4,7 +4,8 @@ year: 2023
 format: "Mixtape"
 featured: false
 gridSpan: default
-spotify: https://open.spotify.com/artist/6g0aXENYFr0qfxoLxPibhT
+cover: /covers/music/fear-survivor.webp
+spotify: https://open.spotify.com/album/2cch0faEtrhYpbzkTGxOA8
 ---
 
 Mixtape — Fear Survivor.

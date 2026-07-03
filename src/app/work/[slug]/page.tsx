@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import { WorkVideo } from "@/components/WorkVideo";
 import { SectionLabel } from "@/components/SectionLabel";
 import { getWorkBySlug, getWorkEntries } from "@/lib/content";
 import { createMetadata } from "@/lib/metadata";
@@ -35,13 +36,13 @@ export default async function WorkDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const { title, role, year, url, tags } = entry.data;
+  const { title, role, year, url, tags, video, cover } = entry.data;
 
   return (
     <div className="page-shell">
       <SectionLabel code="WRK-002" label="Work" />
 
-      <article className="max-w-2xl space-y-10">
+      <article className={`space-y-10 ${video ? "max-w-4xl" : "max-w-2xl"}`}>
         <header className="space-y-4">
           <p className="font-mono text-xs tracking-widest text-[var(--muted)] uppercase">
             {role} · {year}
@@ -62,6 +63,10 @@ export default async function WorkDetailPage({ params }: PageProps) {
             </ul>
           )}
         </header>
+
+        {video && (
+          <WorkVideo src={video} poster={cover} title={title} />
+        )}
 
         <div className="prose-invert space-y-4 text-[var(--text)]">
           <ReactMarkdown>{entry.body}</ReactMarkdown>

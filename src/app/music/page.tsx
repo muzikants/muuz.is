@@ -25,6 +25,7 @@ export default function MusicIndexPage() {
             href={`/music/${entry.slug}`}
             span={entry.data.gridSpan}
             offset={index === 1}
+            cover={entry.data.cover}
           />
         ))}
       </div>

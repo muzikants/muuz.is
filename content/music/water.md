@@ -4,7 +4,8 @@ year: 2023
 format: "Single"
 featured: false
 gridSpan: wide
-spotify: https://open.spotify.com/artist/6g0aXENYFr0qfxoLxPibhT
+cover: /covers/music/water.webp
+spotify: https://open.spotify.com/album/4LEgbuBNNEQ7rEi69ubpU7
 ---
 
 Single — Water.

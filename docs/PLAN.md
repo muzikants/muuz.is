@@ -1,6 +1,6 @@
 # muuz.is — build plan & agent task queue
 
-**Updated:** 2026-07-02  
+**Updated:** 2026-07-03  
 **Deadline:** Ship before **2026-07-05** (Cursor sub); soft target **2026-07-04** (MG Bootcamp event)  
 **Preview:** https://muuzis.vercel.app  
 **Repo:** https://github.com/muzikants/muuz.is
@@ -14,12 +14,12 @@
 | 0 | Plan & brief | ✅ done |
 | 1 | Scaffold + Vercel | ✅ done |
 | 2 | Design shell | ✅ done |
-| 3 | Content collections | ✅ done (covers blocked on T-306) |
+| 3 | Content collections | ✅ done |
 | 4 | SEO + meta | ✅ done (migration) |
-| 5 | DNS cutover | 🔲 blocked on content smoke test |
+| 5 | DNS cutover | ✅ done |
 | 6 | Polish buffer | 🔲 |
 
-**Current focus:** User assets (T-306) + DNS cutover (T-501).
+**Current focus:** Optional `raw-2026` panel still (sound-only project, no video).
 
 ---
 
@@ -104,17 +104,19 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 - **Prompt:** _Add music/[...slug].astro with outbound platform links._
 
 #### T-306 — Cover images + public assets
-- **Status:** `blocked`
+- **Status:** `done`
+- **Handoff:** `Panel.tsx` renders optional `cover` via `next/image`; music covers from Spotify art in `public/covers/music/`; work covers for mg-bootcamp + 4 commercials. `raw-2026` has no video — optional Figma still for panel only.
 - **Deps:** T-301, T-302
-- **Blocker:** User assets — see CONTENT.md "User assets needed"
+- **Blocker:** ~~User assets~~ — `raw-2026` panel still optional
 - **Scope:** `public/covers/**`, update frontmatter `cover` fields, `Panel.astro` to show images
 - **Acceptance:** Panels show cover art; images optimized (WebP preferred); alt text set
 - **Prompt:** _Wire cover images into Panel and content entries once assets are in public/covers/._
 
 #### T-307 — Commercial video embeds
-- **Status:** `blocked`
+- **Status:** `done`
+- **Handoff:** 4 reels compressed to `public/video/` (22 MB total); poster WebPs in `public/covers/work/`; `WorkVideo.tsx` on work detail pages (`preload="none"`, poster from cover).
 - **Deps:** T-304, T-306
-- **Blocker:** PORTFOLIO MP4s need compress + host
+- **Blocker:** ~~PORTFOLIO MP4s need compress + host~~
 - **Scope:** work detail pages for commercial slugs
 - **Acceptance:** HTML5 video or hosted embed on case study pages; lazy load
 - **Prompt:** _Embed commercial reels on work detail pages from public/video/._
@@ -153,15 +155,17 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 ### Phase 5 — launch
 
 #### T-501 — DNS cutover muuz.is → Vercel
-- **Status:** `blocked`
+- **Status:** `done`
+- **Handoff:** Apex `muuz.is` → 308 to `www.muuz.is`; www serves site over HTTPS (Vercel). Confirmed 2026-07-03.
 - **Deps:** T-303, T-402, smoke test on preview
-- **Blocker:** User action at registrar + Vercel domain settings
+- **Blocker:** ~~User action at registrar + Vercel domain settings~~
 - **Scope:** Vercel dashboard + DNS (not code)
 - **Acceptance:** Apex + www resolve; SSL valid; old 500 gone
 - **Prompt:** _Document DNS steps in docs/LAUNCH.md after user confirms registrar access._
 
 #### T-502 — Launch smoke test checklist
-- **Status:** `ready`
+- **Status:** `done`
+- **Handoff:** `docs/LAUNCH.md` — route, mobile, OG, social, Lighthouse, DNS steps; preview + production sections.
 - **Deps:** T-501
 - **Scope:** `docs/LAUNCH.md`
 - **Acceptance:** Checklist: all routes, mobile, OG debugger, Lighthouse, social links open
@@ -212,6 +216,8 @@ Wave 5:             T-403 → T-501 → T-502
 
 | Date | Change |
 | --- | --- |
+| 2026-07-03 | T-307: Commercial reels from `~/Documents/MZ/PORTFOLIO/` → `public/video/`, panel posters, `WorkVideo` embeds on case studies. |
+| 2026-07-03 | T-306 partial: Panel cover images, 5 music + mg-bootcamp WebP covers, album Spotify URLs. T-502: `docs/LAUNCH.md` smoke checklist. |
 | 2026-07-02 | **Stack migration:** Astro → Next.js 15 static export. T-201, T-202, T-401, T-402, T-403 done on new stack. Build → 20 static routes. |
 | 2026-06-22 | Phase 3 content: T-301–T-305 done. 6 work + 5 music entries; dynamic grids; detail routes. Build → 15 pages. |
 | 2026-06-22 | Plan created. Phase 2 marked done (tokens, 4 routes, Panel grid). Pushed `f60be39` to main → Vercel deploy. |
