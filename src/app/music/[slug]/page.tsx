@@ -67,7 +67,7 @@ export default async function MusicDetailPage({ params }: PageProps) {
           />
         )}
 
-        <div className="prose-invert space-y-4 text-[var(--text)]">
+        <div className="prose-case space-y-4">
           <ReactMarkdown>{entry.body}</ReactMarkdown>
         </div>
 

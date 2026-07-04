@@ -8,11 +8,16 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="relative flex min-h-[70dvh] flex-col items-center justify-center overflow-hidden px-6 pt-[var(--spacing-nav)]">
+      <section className="hero-section relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-6">
         <Hero3D />
-        <h1 className="hero-wordmark relative z-[1] text-display-xl font-medium text-[var(--text)]">
-          muuz.is
-        </h1>
+        <div className="relative z-[1] flex flex-col items-center gap-6 text-center">
+          <h1 className="hero-wordmark text-display-xl font-medium text-[var(--text)]">
+            muuz.is
+          </h1>
+          <p className="hero-tagline font-mono text-xs tracking-[0.3em] text-[var(--muted)] uppercase">
+            music · sound · web
+          </p>
+        </div>
       </section>
 
       <section className="page-shell border-t border-[var(--color-border)] pt-16">

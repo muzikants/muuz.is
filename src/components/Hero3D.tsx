@@ -1,14 +1,45 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import dynamic from "next/dynamic";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-function StealthMesh() {
+const Hero3DCanvas = dynamic(
+  () =>
+    import("./Hero3DCanvas").then((module) => ({
+      default: module.Hero3DCanvas,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+        aria-hidden="true"
+      >
+        <div className="h-24 w-24 rotate-45 border border-[var(--color-border)]" />
+      </div>
+    ),
+  },
+);
+
+function StaticFallback() {
   return (
-    <mesh rotation={[0.4, 0.6, 0]}>
-      <icosahedronGeometry args={[1.2, 1]} />
-      <meshStandardMaterial color="#1a1a1a" wireframe />
-    </mesh>
+    <div
+      className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
+      aria-hidden="true"
+    >
+      <svg
+        viewBox="0 0 120 80"
+        className="h-32 w-48 text-[var(--muted)]"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="0.75"
+        aria-hidden="true"
+      >
+        <path d="M10 42 L60 38 L110 42 L95 44 L60 40 L25 44 Z" />
+        <path d="M60 38 L60 28 L68 38 Z" />
+        <line x1="60" y1="40" x2="60" y2="52" />
+      </svg>
+    </div>
   );
 }
 
@@ -16,30 +47,15 @@ export function Hero3D() {
   const reducedMotion = useReducedMotion();
 
   if (reducedMotion) {
-    return (
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
-        aria-hidden="true"
-      >
-        <div className="h-32 w-32 rotate-45 border border-[var(--color-border)]" />
-      </div>
-    );
+    return <StaticFallback />;
   }
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 opacity-30"
+      className="hero-canvas pointer-events-none absolute inset-0 opacity-35"
       aria-hidden="true"
     >
-      <Canvas
-        camera={{ position: [0, 0, 4], fov: 45 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
-      >
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[2, 3, 4]} intensity={0.8} />
-        <StealthMesh />
-      </Canvas>
+      <Hero3DCanvas />
     </div>
   );
 }
