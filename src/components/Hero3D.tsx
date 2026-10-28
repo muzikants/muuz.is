@@ -52,7 +52,7 @@ export function Hero3D() {
 
   return (
     <div
-      className="hero-canvas pointer-events-none absolute inset-0 opacity-35"
+      className="hero-canvas pointer-events-none absolute inset-0 opacity-60"
       aria-hidden="true"
     >
       <Hero3DCanvas />

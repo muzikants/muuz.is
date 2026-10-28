@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Panel } from "@/components/Panel";
 import { SectionLabel } from "@/components/SectionLabel";
 import { getMusicEntries, musicMeta } from "@/lib/content";
+import { flipFlags } from "@/lib/layout";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
@@ -11,6 +12,7 @@ export const metadata: Metadata = createMetadata({
 
 export default function MusicIndexPage() {
   const music = getMusicEntries();
+  const flips = flipFlags(music);
 
   return (
     <div className="page-shell">
@@ -26,6 +28,8 @@ export default function MusicIndexPage() {
             span={entry.data.gridSpan}
             offset={index === 1}
             cover={entry.data.cover}
+            index={index}
+            flip={flips[index]}
           />
         ))}
       </div>

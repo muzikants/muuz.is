@@ -44,6 +44,7 @@ export default function HomePage() {
               span={entry.data.gridSpan}
               offset={index === 1}
               cover={entry.data.cover}
+              index={index}
             />
           ))}
         </div>

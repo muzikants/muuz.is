@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Panel } from "@/components/Panel";
 import { SectionLabel } from "@/components/SectionLabel";
 import { getWorkEntries } from "@/lib/content";
+import { flipFlags } from "@/lib/layout";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
@@ -11,6 +12,7 @@ export const metadata: Metadata = createMetadata({
 
 export default function WorkIndexPage() {
   const work = getWorkEntries();
+  const flips = flipFlags(work);
 
   return (
     <div className="page-shell">
@@ -31,6 +33,8 @@ export default function WorkIndexPage() {
             span={entry.data.gridSpan}
             offset={index % 3 === 1}
             cover={entry.data.cover}
+            index={index}
+            flip={flips[index]}
           />
         ))}
       </div>

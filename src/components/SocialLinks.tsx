@@ -1,4 +1,4 @@
-const links = [
+export const socialLinks = [
   { label: "SoundCloud", href: "https://soundcloud.com/muuzis", external: true },
   {
     label: "Spotify",
@@ -19,7 +19,7 @@ export function SocialLinks({ compact = false }: SocialLinksProps) {
   if (compact) {
     return (
       <ul className="flex flex-wrap gap-x-4 gap-y-2">
-        {links.map(({ label, href }) => (
+        {socialLinks.map(({ label, href }) => (
           <li key={href}>
             <a
               href={href}
@@ -37,7 +37,7 @@ export function SocialLinks({ compact = false }: SocialLinksProps) {
 
   return (
     <ul className="flex flex-col gap-4">
-      {links.map(({ label, href }) => (
+      {socialLinks.map(({ label, href }) => (
         <li key={href}>
           <a
             href={href}

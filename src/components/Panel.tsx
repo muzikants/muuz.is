@@ -16,6 +16,8 @@ type PanelProps = {
   span?: GridSpan;
   offset?: boolean;
   cover?: string;
+  index?: number;
+  flip?: boolean;
 };
 
 export function Panel({
@@ -25,11 +27,13 @@ export function Panel({
   span = "default",
   offset = false,
   cover,
+  index,
+  flip = false,
 }: PanelProps) {
   return (
     <Link
       href={href}
-      className={`panel group ${spanClass[span]}${offset ? " grid-offset" : ""}`}
+      className={`panel group ${spanClass[span]}${offset ? " grid-offset" : ""}${flip ? " grid-flip" : ""}`}
     >
       <div className="panel-cover">
         {cover ? (
@@ -40,9 +44,19 @@ export function Panel({
             sizes="(max-width: 768px) 100vw, 50vw"
             className="panel-cover-img"
           />
-        ) : null}
+        ) : (
+          <div className="panel-placeholder" aria-hidden="true">
+            <span className="panel-placeholder-code">
+              {typeof index === "number"
+                ? String(index + 1).padStart(3, "0")
+                : "---"}{" "}
+              · in progress
+            </span>
+            <span className="panel-placeholder-title">{title}</span>
+          </div>
+        )}
       </div>
-      <div>
+      <div className="panel-caption">
         <p className="panel-title">{title}</p>
         <p className="panel-meta">{meta}</p>
       </div>

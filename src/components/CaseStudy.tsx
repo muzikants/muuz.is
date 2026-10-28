@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 
 type CaseStudyProps = {
@@ -10,8 +9,7 @@ type CaseStudyProps = {
   url?: string;
   urlLabel?: string;
   media?: ReactNode;
-  backHref?: string;
-  backLabel?: string;
+  footer?: ReactNode;
   children: ReactNode;
 };
 
@@ -24,8 +22,7 @@ export function CaseStudy({
   url,
   urlLabel = "View project",
   media,
-  backHref = "/work",
-  backLabel = "All work",
+  footer,
   children,
 }: CaseStudyProps) {
   const accentStyle = accent
@@ -70,11 +67,7 @@ export function CaseStudy({
 
       <div className="case-study-body">{children}</div>
 
-      <footer className="case-study-footer">
-        <Link href={backHref} className="case-study-back">
-          ← {backLabel}
-        </Link>
-      </footer>
+      {footer ? <footer className="case-study-footer">{footer}</footer> : null}
     </article>
   );
 }

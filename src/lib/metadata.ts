@@ -12,30 +12,38 @@ export function createMetadata({
   title,
   description = siteDescription,
   path = "",
+  image,
 }: {
   title?: string;
   description?: string;
   path?: string;
+  image?: string;
 } = {}): Metadata {
   const resolvedTitle = pageTitle(title);
+  // SVG covers are not accepted by OG scrapers — fall back to the default card.
+  const ogImage =
+    image && !image.endsWith(".svg")
+      ? { url: image }
+      : { url: "/og-default.png", width: 1200, height: 630 };
 
   return {
     metadataBase: new URL(siteUrl),
     title: resolvedTitle,
     description,
+    alternates: { canonical: `${siteUrl}${path}` },
     openGraph: {
       title: resolvedTitle,
       description,
       url: `${siteUrl}${path}`,
       siteName: "muuz.is",
-      images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+      images: [ogImage],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: resolvedTitle,
       description,
-      images: ["/og-default.png"],
+      images: [ogImage.url],
     },
   };
 }
