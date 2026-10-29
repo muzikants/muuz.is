@@ -72,3 +72,31 @@ export function musicMeta(entry: MusicEntry): string {
   const { format, year } = entry.data;
   return format ? `${format} · ${year}` : String(year);
 }
+
+export function getAdjacent<T extends { slug: string }>(
+  entries: T[],
+  slug: string,
+): { prev?: T; next?: T } {
+  const index = entries.findIndex((entry) => entry.slug === slug);
+  if (index === -1 || entries.length < 2) return {};
+
+  return {
+    prev: entries[(index - 1 + entries.length) % entries.length],
+    next: entries[(index + 1) % entries.length],
+  };
+}
+
+export function excerpt(body: string, max = 155): string {
+  const plain = body
+    .replace(/[#>*_`[\]()]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return plain.length > max ? `${plain.slice(0, max - 1).trimEnd()}…` : plain;
+}
+
+export function spotifyEmbedUrl(url?: string): string | undefined {
+  const match = url?.match(/open\.spotify\.com\/(album|track|playlist)\/([A-Za-z0-9]+)/);
+  return match
+    ? `https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator&theme=0`
+    : undefined;
+}

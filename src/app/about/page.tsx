@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SectionLabel } from "@/components/SectionLabel";
+import { SectionHead } from "@/components/SectionHead";
 import { SocialLinks } from "@/components/SocialLinks";
 import { createMetadata } from "@/lib/metadata";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = createMetadata({
 export default function AboutPage() {
   return (
     <div className="page-shell">
-      <SectionLabel code="ABT-001" label="About" />
+      <SectionHead code="ABT-001 · Riga, LV" title="About" />
 
       <div className="max-w-md space-y-12">
         <p className="font-mono text-sm tracking-wide text-[var(--muted)]">

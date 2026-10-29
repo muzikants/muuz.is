@@ -1,6 +1,6 @@
 # muuz.is — build plan & agent task queue
 
-**Updated:** 2026-07-03  
+**Updated:** 2026-10-28  
 **Deadline:** Ship before **2026-07-05** (Cursor sub); soft target **2026-07-04** (MG Bootcamp event)  
 **Preview:** https://muuzis.vercel.app  
 **Repo:** https://github.com/muzikants/muuz.is
@@ -17,9 +17,9 @@
 | 3 | Content collections | ✅ done |
 | 4 | SEO + meta | ✅ done (migration) |
 | 5 | DNS cutover | ✅ done |
-| 6 | Polish buffer | 🔲 |
+| 6 | Polish buffer | 🟡 in progress |
 
-**Current focus:** Phase 6 polish — Lighthouse pass (T-601) optional.
+**Current focus:** Phase 6 polish — T-601 Lighthouse pass is next; content depth (real case-study copy) needs user input.
 
 ---
 
@@ -182,15 +182,26 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 - **Scope:** `Hero3D.tsx`, `Hero3DCanvas.tsx`, `CaseStudy.tsx`, `work/[slug]/page.tsx`, `globals.css`, work frontmatter accents
 - **Acceptance:** Hero is full-viewport with animated 3D island; case studies use structured layout; build passes; home First Load JS reduced via dynamic import
 
+#### T-605 — Design iteration: hero + editorial layout
+- **Status:** `done`
+- **Handoff:** Hero: form enlarged and moved off-centre (right on desktop), glowing vertex particles over a dim wireframe, background dust field, pointer parallax; wordmark is now a huge bottom-left lockup with tagline + scroll cue; codec HUD (coords, live form/morph readout). Layout: borderless panels with `01`–`NN` index captions; fixed 7+5 / 5+7 row rhythm in CSS (`.work-grid` nth-child) — content `gridSpan` no longer drives layout; new `SectionHead` (oversized titles + entry count) on home, work, music, about.
+- **Deps:** T-602, T-604
+
 #### T-601 — Lighthouse performance pass
 - **Status:** `deferred`
 - **Deps:** T-401, T-306
 - **Acceptance:** Landing ≥90 performance mobile
 
 #### T-602 — 3D morph animation (v1.1)
-- **Status:** `deferred`
-- **Deps:** T-401, Blender glTF
+- **Status:** `done`
+- **Handoff:** Procedural instead of Blender glTF — `Hero3DCanvas.tsx` builds one icosahedron with Form A (faceted swept stealth wing) as base and Form B (noise-displaced organic mass) as a morph target. Idle cycle drifts A→B→A; scrolling out of the hero commits to B. Canvas stops rendering when off-screen. Swap in a glTF later if the Blender forms land.
+- **Deps:** T-401
 - **Acceptance:** Form A → Form B morph on scroll or idle
+
+#### T-604 — Release pages, grid packing, 404, SEO depth
+- **Status:** `done`
+- **Handoff:** New `Release.tsx` layout for `/music/[slug]` (sticky large cover, Spotify embed, platform link list, MusicAlbum JSON-LD). `EntryPager.tsx` prev/next on music + work detail. Grid uses `dense` flow and alternates large panels (`src/lib/layout.ts`) — no more holes. Coverless panels render a typographic placeholder. Fixed RAW 26 cover (invalid UTF-8 byte broke the SVG). Custom `not-found.tsx`. Per-page OG image = entry cover, descriptions from body, canonical URLs, MusicGroup JSON-LD in layout. `og-default.png` resized to true 1200×630 (1.1 MB → 325 KB).
+- **Deps:** T-305, T-306
 
 ---
 
@@ -223,6 +234,8 @@ Wave 5:             T-403 → T-501 → T-502
 
 | Date | Change |
 | --- | --- |
+| 2026-10-29 | T-605: hero particles/parallax/HUD + bottom-left wordmark; borderless indexed panels; fixed editorial grid rhythm; SectionHead. |
+| 2026-10-28 | T-602 procedural stealth→organic morph hero. T-604 release pages + Spotify embeds, prev/next pager, dense grid, 404, per-page OG/JSON-LD, RAW 26 cover fix. |
 | 2026-07-03 | T-603: Enhanced 3D hero (stealth silhouette, codec grid, lazy load), CaseStudy layout with per-project accents, raw-2026 waveform cover. |
 | 2026-07-03 | T-307: Commercial reels from `~/Documents/MZ/PORTFOLIO/` → `public/video/`, panel posters, `WorkVideo` embeds on case studies. |
 | 2026-07-03 | T-306 partial: Panel cover images, 5 music + mg-bootcamp WebP covers, album Spotify URLs. T-502: `docs/LAUNCH.md` smoke checklist. |

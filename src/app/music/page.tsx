@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Panel } from "@/components/Panel";
-import { SectionLabel } from "@/components/SectionLabel";
+import { SectionHead } from "@/components/SectionHead";
 import { getMusicEntries, musicMeta } from "@/lib/content";
 import { createMetadata } from "@/lib/metadata";
 
@@ -14,7 +14,11 @@ export default function MusicIndexPage() {
 
   return (
     <div className="page-shell">
-      <SectionLabel code="MUS-001" label="Music" />
+      <SectionHead
+        code="MUS-001 · releases as muuzis"
+        title="Music"
+        count={music.length}
+      />
 
       <div className="work-grid">
         {music.map((entry, index) => (
@@ -23,9 +27,8 @@ export default function MusicIndexPage() {
             title={entry.data.title}
             meta={musicMeta(entry)}
             href={`/music/${entry.slug}`}
-            span={entry.data.gridSpan}
-            offset={index === 1}
             cover={entry.data.cover}
+            index={index}
           />
         ))}
       </div>

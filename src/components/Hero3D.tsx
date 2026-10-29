@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useCallback, useRef } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const Hero3DCanvas = dynamic(
@@ -8,36 +9,25 @@ const Hero3DCanvas = dynamic(
     import("./Hero3DCanvas").then((module) => ({
       default: module.Hero3DCanvas,
     })),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
-        aria-hidden="true"
-      >
-        <div className="h-24 w-24 rotate-45 border border-[var(--color-border)]" />
-      </div>
-    ),
-  },
+  { ssr: false },
 );
 
 function StaticFallback() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
+      className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-40 md:justify-end md:pr-[12vw]"
       aria-hidden="true"
     >
       <svg
         viewBox="0 0 120 80"
-        className="h-32 w-48 text-[var(--muted)]"
+        className="h-48 w-72 text-[var(--muted)]"
         fill="none"
         stroke="currentColor"
-        strokeWidth="0.75"
+        strokeWidth="0.5"
         aria-hidden="true"
       >
-        <path d="M10 42 L60 38 L110 42 L95 44 L60 40 L25 44 Z" />
-        <path d="M60 38 L60 28 L68 38 Z" />
-        <line x1="60" y1="40" x2="60" y2="52" />
+        <path d="M10 42 L60 30 L110 42 L60 50 Z" />
+        <path d="M10 42 L60 40 L110 42 M60 30 L60 50" />
       </svg>
     </div>
   );
@@ -45,17 +35,49 @@ function StaticFallback() {
 
 export function Hero3D() {
   const reducedMotion = useReducedMotion();
+  const readoutRef = useRef<HTMLSpanElement>(null);
+  const formRef = useRef<HTMLSpanElement>(null);
 
-  if (reducedMotion) {
-    return <StaticFallback />;
-  }
+  // Write straight to the DOM — re-rendering React every frame is wasteful.
+  const onMorph = useCallback((value: number) => {
+    if (readoutRef.current) {
+      readoutRef.current.textContent = `${String(Math.round(value * 100)).padStart(3, "0")}%`;
+    }
+    if (formRef.current) {
+      formRef.current.textContent = value < 0.5 ? "A · stealth" : "B · organic";
+    }
+  }, []);
 
   return (
-    <div
-      className="hero-canvas pointer-events-none absolute inset-0 opacity-35"
-      aria-hidden="true"
-    >
-      <Hero3DCanvas />
-    </div>
+    <>
+      {reducedMotion ? (
+        <StaticFallback />
+      ) : (
+        <div
+          className="hero-canvas pointer-events-none absolute inset-0"
+          aria-hidden="true"
+        >
+          <Hero3DCanvas onMorph={onMorph} />
+        </div>
+      )}
+
+      <div className="hero-hud hero-hud-top" aria-hidden="true">
+        <span>MZ-01 // codec</span>
+        <span>56.95°N 24.11°E · Riga</span>
+      </div>
+
+      {!reducedMotion && (
+        <div className="hero-hud hero-hud-readout" aria-hidden="true">
+          <span>form</span>
+          <span ref={formRef} className="text-[var(--text)]">
+            A · stealth
+          </span>
+          <span>morph</span>
+          <span ref={readoutRef} className="text-[var(--text)]">
+            000%
+          </span>
+        </div>
+      )}
+    </>
   );
 }

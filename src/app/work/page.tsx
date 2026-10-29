@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Panel } from "@/components/Panel";
-import { SectionLabel } from "@/components/SectionLabel";
+import { SectionHead } from "@/components/SectionHead";
 import { getWorkEntries } from "@/lib/content";
 import { createMetadata } from "@/lib/metadata";
 
@@ -14,12 +14,11 @@ export default function WorkIndexPage() {
 
   return (
     <div className="page-shell">
-      <SectionLabel code="WRK-001" label="Work" />
-
-      <p className="mb-12 max-w-xl text-[var(--muted)]">
-        Selected projects across web, commercial, and sound — asymmetric grid,
-        detail on click.
-      </p>
+      <SectionHead
+        code="WRK-001 · web / commercial / sound"
+        title="Work"
+        count={work.length}
+      />
 
       <div className="work-grid">
         {work.map((entry, index) => (
@@ -28,9 +27,8 @@ export default function WorkIndexPage() {
             title={entry.data.title}
             meta={`${entry.data.role} · ${entry.data.year}`}
             href={`/work/${entry.slug}`}
-            span={entry.data.gridSpan}
-            offset={index % 3 === 1}
             cover={entry.data.cover}
+            index={index}
           />
         ))}
       </div>
