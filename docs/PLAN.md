@@ -182,6 +182,11 @@ Status values: `ready` | `in_progress` | `done` | `blocked` | `deferred`
 - **Scope:** `Hero3D.tsx`, `Hero3DCanvas.tsx`, `CaseStudy.tsx`, `work/[slug]/page.tsx`, `globals.css`, work frontmatter accents
 - **Acceptance:** Hero is full-viewport with animated 3D island; case studies use structured layout; build passes; home First Load JS reduced via dynamic import
 
+#### T-605 — Design iteration: hero + editorial layout
+- **Status:** `done`
+- **Handoff:** Hero: form enlarged and moved off-centre (right on desktop), glowing vertex particles over a dim wireframe, background dust field, pointer parallax; wordmark is now a huge bottom-left lockup with tagline + scroll cue; codec HUD (coords, live form/morph readout). Layout: borderless panels with `01`–`NN` index captions; fixed 7+5 / 5+7 row rhythm in CSS (`.work-grid` nth-child) — content `gridSpan` no longer drives layout; new `SectionHead` (oversized titles + entry count) on home, work, music, about.
+- **Deps:** T-602, T-604
+
 #### T-601 — Lighthouse performance pass
 - **Status:** `deferred`
 - **Deps:** T-401, T-306
@@ -229,6 +234,7 @@ Wave 5:             T-403 → T-501 → T-502
 
 | Date | Change |
 | --- | --- |
+| 2026-10-29 | T-605: hero particles/parallax/HUD + bottom-left wordmark; borderless indexed panels; fixed editorial grid rhythm; SectionHead. |
 | 2026-10-28 | T-602 procedural stealth→organic morph hero. T-604 release pages + Spotify embeds, prev/next pager, dense grid, 404, per-page OG/JSON-LD, RAW 26 cover fix. |
 | 2026-07-03 | T-603: Enhanced 3D hero (stealth silhouette, codec grid, lazy load), CaseStudy layout with per-project accents, raw-2026 waveform cover. |
 | 2026-07-03 | T-307: Commercial reels from `~/Documents/MZ/PORTFOLIO/` → `public/video/`, panel posters, `WorkVideo` embeds on case studies. |
